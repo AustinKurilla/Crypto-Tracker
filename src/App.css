@@ -1,12 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
-
+.CryptoApp{
+  width:100%;
+  height:100%;
+  justify-content: center;
+}
 *{
   box-sizing: border-box;
   margin:0;
   padding:0;
   font-family: 'Roboto', sans-serif;
+}
+.theme-dark{
+  margin:0;
   background-color: #1a1a1c;
   color:#fff;
+}
+
+.theme-light{
+  background-color: #fff;
+  color:#1a1a1c;
 }
 
 .coin-app{
@@ -18,24 +30,73 @@
 }
 
 .search-bar{
-  margin-bottom: 64px;
+  margin-bottom: 5vh;
   display: flex;
-  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  height:10vh;
+  width:90vw;
+  margin-left: 5vw;
+}
+
+.search-text{
+  text-align: center;
+  font-size: 1.7em;
+  margin:0;
+}
+
+.search-input{
+  width: 30vw;
+  height:6vh;
+  border-radius: 5px;
+  border: none;
+  background-image: linear-gradient(-225deg, #FFAFCC 0%, #BDE0FE 48%, #A2D2FF 100%);
+  color: black;
+}
+
+.search-input::placeholder{
+  color: black;
+}
+
+.navbar-right{
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.search-text{
-  margin-bottom: 32px;
-  text-align: center;
+.themeselect{
+  margin-left: 20%;
+  cursor: pointer;
 }
-
-.search-input{
-  padding-left: 16px;
-  width: 300px;
-  height:50px;
-  border-radius: 5px;
-  border: none;
-  background-image: linear-gradient(-225deg, #ac32e4 0%, #7918f2 48%, #4801ff 100%);
-  color: #e2e2e2;
+.infobar{
+  width:90vw;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border-bottom: 1px solid white;
+  margin-left: 5vw;
+}
+.rank{
+  width:20%;
+}
+.name{
+  width: 30%;
+}
+.ticker{
+  width:10%;
+}
+.coinprice{
+  width: 20%;
+}
+.marketcap{
+  width:10%;
+}
+.percentchange24{
+  width:10%;
+}
+@media only screen and (max-width:700px){
+  .infobar{
+      font-size:60%;
+  }
 }
