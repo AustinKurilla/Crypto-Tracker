@@ -8,6 +8,9 @@ import moonfilled from './img/moon-filled.png'
 function App() {
   const [coins, setCoins] = useState([])
   const [search, setSearch] = useState('')
+  const [livefeedTheme, setLiveFeedTheme] = useState(<iframe  title="livefeed" 
+  src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=" 
+  width="100%" height="36px" scrolling="auto" border="0" className="div3"></iframe>)
   
   //Light and dark themes
   const [colorTheme, setTheme] =useState('theme-light')
@@ -20,6 +23,9 @@ function App() {
     }
     if (currThemeColor === 'theme-dark'){
       document.getElementById('html').classList.add('theme-dark')
+      setLiveFeedTheme(<iframe  title="livefeed" 
+      src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=" 
+      width="100%" height="36px" scrolling="auto" border="0" className="div3"></iframe>)
     }
     else{
       setThemeImg(moonfilled)
@@ -32,12 +38,18 @@ function App() {
       setThemeImg(moonunfilled)
       localStorage.setItem('color-theme', 'theme-dark')
       document.getElementById('html').classList.add('theme-dark')
+      setLiveFeedTheme(<iframe  title="livefeed" 
+      src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=" 
+      width="100%" height="36px" scrolling="auto" border="0" className="div3"></iframe>)
     }
     else{
       setTheme('theme-light')
       setThemeImg(moonfilled)
       localStorage.setItem('color-theme', 'theme-light')
       document.getElementById('html').classList.remove('theme-dark')
+      setLiveFeedTheme(<iframe  title="livefeed" 
+      src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=" 
+      width="100%" height="36px" scrolling="auto" border="0" className="div3"></iframe>)
     }
   }
 
@@ -63,6 +75,7 @@ function App() {
   
   return (
       <div className="CryptoApp" >
+        <div className={['div1', {colorTheme}]}><div className='div2'>{livefeedTheme}</div></div>
         <div className='search-bar'>
           <div className='navbar-left'>
             <h1 className='search-text'>Crypto Tracka</h1>
@@ -76,8 +89,8 @@ function App() {
         </div>
         <div className='infobar'>
           <p className='rank'>Rank</p>
-          <p className="name">Coin Name</p>
-          <p className='ticker'>Coin Ticker</p>
+          <p className="name">Name</p>
+          <p className='ticker'>Ticker</p>
           <p className='coinprice'>Price</p>
           <p className="marketcap">Market Cap</p>
           <p className="percentchange24">% Change 24H</p>
