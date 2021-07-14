@@ -18,6 +18,12 @@ function App() {
     if (currThemeColor){
       setTheme(currThemeColor)
     }
+    if (currThemeColor === 'theme-dark'){
+      document.getElementById('html').classList.add('theme-dark')
+    }
+    else{
+      setThemeImg(moonfilled)
+    }
   }, [])
 
   const themeChange = () => {
@@ -25,11 +31,13 @@ function App() {
       setTheme('theme-dark')
       setThemeImg(moonunfilled)
       localStorage.setItem('color-theme', 'theme-dark')
+      document.getElementById('html').classList.add('theme-dark')
     }
     else{
       setTheme('theme-light')
       setThemeImg(moonfilled)
-      localStorage.setItem('color-theme', 'theme-dark')
+      localStorage.setItem('color-theme', 'theme-light')
+      document.getElementById('html').classList.remove('theme-dark')
     }
   }
 
@@ -54,7 +62,6 @@ function App() {
     )
   
   return (
-    <body className={colorTheme}>
       <div className="CryptoApp" >
         <div className='search-bar'>
           <div className='navbar-left'>
@@ -75,6 +82,7 @@ function App() {
           <p className="marketcap">Market Cap</p>
           <p className="percentchange24">% Change 24H</p>
         </div>
+        <div className={colorTheme} id='coin-div'>
         {filteredCoins.map(coin =>{
           return (
         <Coin key={coin.id} 
@@ -87,8 +95,8 @@ function App() {
             rank={coin.market_cap_rank}/>
           );
           })}
+          </div>
       </div>
-    </body>
     );
 }
 
