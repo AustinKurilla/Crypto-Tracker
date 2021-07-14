@@ -4,6 +4,13 @@
   height:100%;
   justify-content: center;
 }
+#preloaderDIV{
+  width: 100%;
+  height:100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
 html, body{
   min-height: 100%;
 }
@@ -83,12 +90,12 @@ html, body{
 }
 .rank{
   width:5%;
-  margin-right: 11%;
-  margin-left: 2%;
+  margin-right: 11.5%;
+  margin-left: 1%;
 }
 .name{
   width: 14%;
-  margin-right: 4%;
+  margin-right: 3.2%;
 }
 .ticker{
   width:8%;
@@ -96,14 +103,14 @@ html, body{
 }
 .coinprice{
   width: 8%;
-  margin-right: 14%;
+  margin-right: 8%;
 }
 .marketcap{
-  width:9%;
-  margin-right: 14%;
+  width:15%;
 }
 .percentchange24{
-  width:12%;
+  width:15%;
+  margin-right: 5%;
 }
 @media only screen and (max-width:700px){
   .infobar{
@@ -111,6 +118,7 @@ html, body{
   }
 }
 
+/*div 1-div4 are all part of the live feed at the top of the page*/
 .div1{
   height:62px; overflow:hidden; box-sizing: border-box; border: 1px solid #56667F; border-radius: 4px; text-align: right; line-height:14px; block-size:62px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #56667F;padding:1px;padding: 0px; margin: 0px; width: 100%;
 }

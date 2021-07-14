@@ -37,7 +37,7 @@
     display: flex;
     text-align: center;
     justify-content: space-between;
-    width:60%;
+    width:40%;
 }
 
 .coin-price{
@@ -45,7 +45,7 @@
 }
 
 .coin-marketcap{
-    width:10vw;
+    width:7%;
 }
 
 .coin-percent{

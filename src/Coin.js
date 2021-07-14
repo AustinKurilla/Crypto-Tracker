@@ -1,6 +1,9 @@
 import React from 'react'
 import './cryptoapp.css'
 const Coin = ({name,image,symbol,price,marketcap,priceChange,rank}) => {
+    if(priceChange == null){
+        priceChange = 0;
+    }
     return (
         <div className='coin-container'>
             <div className='coin-row'>
@@ -12,10 +15,10 @@ const Coin = ({name,image,symbol,price,marketcap,priceChange,rank}) => {
                 </div>
                 <div className='coin-data'>
                     <p className='coin-price'>${price.toLocaleString()}</p>
-                    <p className='coin-marketcap'>${marketcap.toLocaleString()}</p>
                     {priceChange < 0 ? (
                         <p className='coin-percent red'>{priceChange.toFixed(2)}%</p>
                     ) : (<p className='coin-percent green'>{priceChange.toFixed(2)}%</p>)}
+                    <p className='coin-marketcap'>${marketcap.toLocaleString()}</p>
                 </div>
             </div>
         </div>
