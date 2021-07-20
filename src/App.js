@@ -5,13 +5,18 @@ import Coin from './Coin';
 import moonunfilled from './img/moon-unfilled.png';
 import moonfilled from './img/moon-filled.png'
 import ReactLoading from 'react-loading';
-import { PieChart } from 'react-minimal-pie-chart';
+import Global from './Global'
+import Infobar from './Infobar'
+import './global.css'
+import randomColor from 'randomcolor';
 
 function App() {
   const [coins, setCoins] = useState([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] =useState('true')
   const [globalData, setGlobalData] = useState([])
+  const [colors, setColors] = useState([])
+
   //Light and dark themes
   const [colorTheme, setTheme] =useState('theme-light')
   const [themeImg, setThemeImg] =useState(moonunfilled)
@@ -45,14 +50,13 @@ function App() {
       document.getElementById('html').classList.remove('theme-dark')
     }
   }
-
-  //Get data from API
-  useEffect(() => {
-    axios.get('https://api.coingecko.com/api/v3/global')
-    .then(res => {
-      setGlobalData(res.data)
-    }).catch(error => console.log(error))
-  }, []);
+    //Get data from API
+    useEffect(() => {
+        axios.get('https://api.coingecko.com/api/v3/global')
+        .then(res => {
+        setGlobalData(res.data)
+        }).catch(error => console.log(error))
+    }, []);
 
   useEffect(()=> {
     axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false'
@@ -61,7 +65,7 @@ function App() {
         setCoins(res.data)
         //Load main content after preloader finishes
         setTimeout(
-          () => setLoading(false),2000 //disable preloader after content is finished loading + 2 seconds
+          () => setLoading(false),1000 //disable preloader after content is finished loading + 2 seconds
         )
       }).catch(error => console.log(error));
   }, []);
@@ -76,14 +80,16 @@ function App() {
     coin.name.toLowerCase().includes(search.toLowerCase()) ||
     coin.symbol.toLowerCase().includes(search.toLowerCase())
   );
-
-  //calculate total market cap
-  let totalMarketCap = 0;
-  coins.map(coin => {
-    totalMarketCap = totalMarketCap + coin.market_cap;
-    return null;
-  })
-  totalMarketCap = totalMarketCap.toLocaleString();
+  
+  //Generates random colors for pie chart
+  useEffect(()=> {
+  var colors = []
+  for(let i = 0; i< 100; i++){
+    colors.push(randomColor());
+  }
+  console.log(colors)
+  setColors(colors)
+  },[]);
 
   return (
     <>
@@ -101,30 +107,19 @@ function App() {
               <img src={themeImg} className='themeselect' alt='theme-selector' onClick={() => themeChange()} style={{"pointerEvents": "all"}}/>
           </div>
         </div>
-        <div className='global-info'>
-          <div>In the past 24 hours the global crypto market has changed 
-            {globalData.data.market_cap_change_percentage_24h_usd > 0 ? (<p className='green'> {globalData.data.market_cap_change_percentage_24h_usd}</p>) : ( <p className='red'> {globalData.data.market_cap_change_percentage_24h_usd}</p>)}
-            the total crypto market cap is now ${totalMarketCap}</div>
-        </div>
-        <div className='infobar'>
-          <p className='rank'>Rank</p>
-          <p className="name">Name</p>
-          <p className='ticker'>Ticker</p>
-          <p className='coinprice'>Price</p>
-          <p className="percentchange24">% Change 24H</p>
-          <p className="marketcap">Market Cap</p>
-        </div>
+        <Global coins={coins} globalData={globalData} colors={colors}/>
+        <Infobar/>
         <div className={colorTheme} id='coin-div'>
         {filteredCoins.map(coin =>{
           return (
-        <Coin key={coin.id} 
-            name={coin.name} 
-            image={coin.image} 
-            symbol={coin.symbol.toUpperCase()} 
-            marketcap={coin.market_cap} 
-            price={coin.current_price}
-            priceChange={coin.price_change_percentage_24h}
-            rank={coin.market_cap_rank}/>
+            <Coin key={coin.id} 
+                name={coin.name} 
+                image={coin.image} 
+                symbol={coin.symbol.toUpperCase()} 
+                marketcap={coin.market_cap} 
+                price={coin.current_price}
+                priceChange={coin.price_change_percentage_24h}
+                rank={coin.market_cap_rank}/>
           );
           })}
           </div>
