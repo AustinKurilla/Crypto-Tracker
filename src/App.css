@@ -134,3 +134,10 @@ html, body{
 .div4{
  line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%; font-family: Verdana, Tahoma, Arial, sans-serif;
 }
+
+.red{
+  color: #f00606;
+}
+.green{
+  color: #11d811;
+}

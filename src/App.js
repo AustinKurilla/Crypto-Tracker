@@ -5,17 +5,13 @@ import Coin from './Coin';
 import moonunfilled from './img/moon-unfilled.png';
 import moonfilled from './img/moon-filled.png'
 import ReactLoading from 'react-loading';
+import { PieChart } from 'react-minimal-pie-chart';
 
 function App() {
   const [coins, setCoins] = useState([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] =useState('true')
-
-  //Live feed widget 
-  const [livefeedTheme, setLiveFeedTheme] = useState(<iframe  title="livefeed" 
-  src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=" 
-  width="100%" height="36px" scrolling="auto" border="0" className="div3"></iframe>)
-  
+  const [globalData, setGlobalData] = useState([])
   //Light and dark themes
   const [colorTheme, setTheme] =useState('theme-light')
   const [themeImg, setThemeImg] =useState(moonunfilled)
@@ -28,9 +24,6 @@ function App() {
     }
     if (currThemeColor === 'theme-dark'){
       document.getElementById('html').classList.add('theme-dark')
-      setLiveFeedTheme(<iframe  title="livefeed" 
-      src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=" 
-      width="100%" height="36px" scrolling="auto" border="0" className="div3"></iframe>)
     }
     else{
       setThemeImg(moonfilled)
@@ -38,39 +31,41 @@ function App() {
   }, [])
 
   const themeChange = () => {
-
     //if color theme is currently light switch it to dark or vice versa
     if (colorTheme === 'theme-light'){
       setTheme('theme-dark')
       setThemeImg(moonunfilled)
       localStorage.setItem('color-theme', 'theme-dark')
       document.getElementById('html').classList.add('theme-dark')
-      setLiveFeedTheme(<iframe  title="livefeed" 
-      src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=" 
-      width="100%" height="36px" scrolling="auto" border="0" className="div3"></iframe>)
     }
     else{
       setTheme('theme-light')
       setThemeImg(moonfilled)
       localStorage.setItem('color-theme', 'theme-light')
       document.getElementById('html').classList.remove('theme-dark')
-      setLiveFeedTheme(<iframe  title="livefeed" 
-      src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=" 
-      width="100%" height="36px" scrolling="auto" border="0" className="div3"></iframe>)
     }
   }
 
   //Get data from API
+  useEffect(() => {
+    axios.get('https://api.coingecko.com/api/v3/global')
+    .then(res => {
+      setGlobalData(res.data)
+    }).catch(error => console.log(error))
+  }, []);
+
   useEffect(()=> {
     axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false'
       )
       .then(res => {
         setCoins(res.data)
         //Load main content after preloader finishes
-        setLoading(false)
+        setTimeout(
+          () => setLoading(false),2000 //disable preloader after content is finished loading + 2 seconds
+        )
       }).catch(error => console.log(error));
   }, []);
-
+  
   //Called whenever data in the search bar changes
   const handleChange = e => {
     setSearch(e.target.value)
@@ -80,13 +75,21 @@ function App() {
   const filteredCoins = coins.filter(coin => 
     coin.name.toLowerCase().includes(search.toLowerCase()) ||
     coin.symbol.toLowerCase().includes(search.toLowerCase())
-    )
-  
+  );
+
+  //calculate total market cap
+  let totalMarketCap = 0;
+  coins.map(coin => {
+    totalMarketCap = totalMarketCap + coin.market_cap;
+    return null;
+  })
+  totalMarketCap = totalMarketCap.toLocaleString();
+
   return (
     <>
     { loading ? ( <div className={colorTheme} id='preloaderDIV'><ReactLoading type={'spinningBubbles'} color={'#bbe0ff'} height={667} width={375} className='preloader'/></div>) : (
       <div className="CryptoApp" >
-        <div className={['div1', {colorTheme}]}><div className='div2'>{livefeedTheme}</div></div>
+        <div className={['div1', {colorTheme}]}><div className='div2'></div></div>
         <div className='search-bar'>
           <div className='navbar-left'>
             <h1 className='search-text'>Crypto Tracka</h1>
@@ -99,7 +102,9 @@ function App() {
           </div>
         </div>
         <div className='global-info'>
-          
+          <div>In the past 24 hours the global crypto market has changed 
+            {globalData.data.market_cap_change_percentage_24h_usd > 0 ? (<p className='green'> {globalData.data.market_cap_change_percentage_24h_usd}</p>) : ( <p className='red'> {globalData.data.market_cap_change_percentage_24h_usd}</p>)}
+            the total crypto market cap is now ${totalMarketCap}</div>
         </div>
         <div className='infobar'>
           <p className='rank'>Rank</p>
