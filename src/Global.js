@@ -3,7 +3,7 @@ import './cryptoapp.css'
 import { PieChart } from 'react-minimal-pie-chart';
 import './global.css'
 
-//Provides the global data bar 
+//Provides the global data bar (the total crypto market cap and the total crypto market change over 24h)
 const Global = ({coins,globalData,colors}) => {
     //calculate total market cap
     let totalMarketCap = 0;

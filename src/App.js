@@ -2,38 +2,25 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import axios from 'axios';
 import Coin from './Coin';
-import moonunfilled from './img/moon-unfilled.png';
-import moonfilled from './img/moon-filled.png'
 import ReactLoading from 'react-loading';
 import Global from './Global'
 import Infobar from './Infobar'
 import './global.css'
-import randomColor from 'randomcolor';
+import moonunfilled from './img/moon-unfilled.png';
+import moonfilled from './img/moon-filled.png'
+import {generateColors, getSavedTheme ,getSavedThemeImg}  from './Helpers'
 
 function App() {
   const [coins, setCoins] = useState([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] =useState('true')
   const [globalData, setGlobalData] = useState([])
-  const [colors, setColors] = useState([])
+  const [colors] = useState(generateColors)
 
   //Light and dark themes
-  const [colorTheme, setTheme] =useState('theme-light')
-  const [themeImg, setThemeImg] =useState(moonunfilled)
+  const [colorTheme, setTheme] =useState(getSavedTheme)
+  const [themeImg, setThemeImg] =useState(getSavedThemeImg)
 
-  useEffect(() =>{
-    const currThemeColor = localStorage.getItem('color-theme');
-    //if theme color is saved in local storage set it to the correct one
-    if (currThemeColor){
-      setTheme(currThemeColor)
-    }
-    if (currThemeColor === 'theme-dark'){
-      document.getElementById('html').classList.add('theme-dark')
-    }
-    else{
-      setThemeImg(moonfilled)
-    }
-  }, [])
 
   const themeChange = () => {
     //if color theme is currently light switch it to dark or vice versa
@@ -80,22 +67,11 @@ function App() {
     coin.name.toLowerCase().includes(search.toLowerCase()) ||
     coin.symbol.toLowerCase().includes(search.toLowerCase())
   );
-  
-  //Generates random colors for pie chart
-  useEffect(()=> {
-  var colors = []
-  for(let i = 0; i< 100; i++){
-    colors.push(randomColor());
-  }
-  console.log(colors)
-  setColors(colors)
-  },[]);
 
   return (
     <>
     { loading ? ( <div className={colorTheme} id='preloaderDIV'><ReactLoading type={'spinningBubbles'} color={'#bbe0ff'} height={667} width={375} className='preloader'/></div>) : (
       <div className="CryptoApp" >
-        <div className={['div1', {colorTheme}]}><div className='div2'></div></div>
         <div className='search-bar'>
           <div className='navbar-left'>
             <h1 className='search-text'>Crypto Tracka</h1>
