@@ -1,6 +1,6 @@
 import React from 'react'
 import './cryptoapp.css'
-const Coin = ({name,image,symbol,price,marketcap,priceChange,rank}) => {
+const Coin = ({name,image,symbol,price,marketcap,priceChange,rank,favoriteButton}) => {
     if(priceChange == null){
         priceChange = 0;
     }
@@ -19,6 +19,9 @@ const Coin = ({name,image,symbol,price,marketcap,priceChange,rank}) => {
                         <p className='coin-percent red'>{priceChange.toFixed(2)}%</p>
                     ) : (<p className='coin-percent green'>{priceChange.toFixed(2)}%</p>)}
                     <p className='coin-marketcap'>${marketcap.toLocaleString()}</p>
+                    <div className='favoritebutton'>
+                        <input className='checkbox' type='checkbox' onChange={(e) => favoriteButton(rank, e)}></input>
+                    </div>
                 </div>
             </div>
         </div>

@@ -68,6 +68,15 @@ function App() {
     coin.symbol.toLowerCase().includes(search.toLowerCase())
   );
 
+  const favoriteButton = (rank, e) => {
+    if (e.target.checked){
+      console.log(rank + 'is checked')
+    }
+    else{
+      console.log(rank + 'is not checked')
+    }
+  }
+
   return (
     <>
     { loading ? ( <div className={colorTheme} id='preloaderDIV'><ReactLoading type={'spinningBubbles'} color={'#bbe0ff'} height={667} width={375} className='preloader'/></div>) : (
@@ -95,7 +104,8 @@ function App() {
                 marketcap={coin.market_cap} 
                 price={coin.current_price}
                 priceChange={coin.price_change_percentage_24h}
-                rank={coin.market_cap_rank}/>
+                rank={coin.market_cap_rank}
+                favoriteButton={favoriteButton}/>
           );
           })}
           </div>

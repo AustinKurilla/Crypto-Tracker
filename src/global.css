@@ -11,7 +11,6 @@
     justify-content: center;
     align-items: center;
     margin: auto;
-    font-size: 24px;
 }
 .global-info-right{
     display: flex;
@@ -19,11 +18,15 @@
     justify-content: center;
 }
 
-@media only screen and (max-width:750px){
+@media only screen and (max-width:500px){
     .global-info-left{
-        font-size: 12px;
+        font-size: 65%;
+        width: 100%;
+    }
+    .global-info-right{
+        display: none;
     }
     .global-container{
-        height: 25vh;
+        height: 20%;
     }
 }
