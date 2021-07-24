@@ -8,15 +8,23 @@ import Infobar from './Infobar'
 import './global.css'
 import moonunfilled from './img/moon-unfilled.png';
 import moonfilled from './img/moon-filled.png'
-import {generateColors, getSavedTheme ,getSavedThemeImg}  from './Helpers'
+import {generateColors, getSavedTheme ,getSavedThemeImg, loadSavedCoins}  from './Helpers'
 
 function App() {
+  //Coins loaded from API
   const [coins, setCoins] = useState([])
+  //Search bar content
   const [search, setSearch] = useState('')
+  //Display preloader if true display content if false
   const [loading, setLoading] =useState('true')
+  //Global data to be displayed loaded from API
   const [globalData, setGlobalData] = useState([])
+  //array of 100 random colors for pie chart
   const [colors] = useState(generateColors)
-
+  //saved array for all saved coins
+  const [savedCoins, setSavedCoins] = useState(loadSavedCoins)
+  //if true sort the list of coins by favorites 
+  const [sortCoins, setSortCoins] = useState(false)
   //Light and dark themes
   const [colorTheme, setTheme] =useState(getSavedTheme)
   const [themeImg, setThemeImg] =useState(getSavedThemeImg)
@@ -63,22 +71,44 @@ function App() {
   }
 
   //Filter data based on search in search bar
-  const filteredCoins = coins.filter(coin => 
-    coin.name.toLowerCase().includes(search.toLowerCase()) ||
-    coin.symbol.toLowerCase().includes(search.toLowerCase())
+  const filteredCoins = coins.filter(coin => {
+    if(sortCoins){
+      return(
+      (coin.name.toLowerCase().includes(search.toLowerCase()) && savedCoins.includes(coin.market_cap_rank)) ||
+      (coin.symbol.toLowerCase().includes(search.toLowerCase()) && savedCoins.includes(coin.market_cap_rank))
+      )
+    }
+    else{
+      return(
+      coin.name.toLowerCase().includes(search.toLowerCase()) ||
+      coin.symbol.toLowerCase().includes(search.toLowerCase())
+      )
+    }
+  }
   );
 
   const favoriteButton = (rank, e) => {
+    var savedCoinarr = savedCoins;
+    console.log(savedCoinarr)
+    var index = savedCoinarr.indexOf(rank);
     if (e.target.checked){
-      console.log(rank + ' is checked')
+      savedCoinarr.push(rank)
+      setSavedCoins(savedCoinarr)
     }
     else{
-      console.log(rank + ' is not checked')
+      savedCoinarr.splice(index,1)
+      setSavedCoins(savedCoinarr)
     }
+    localStorage.setItem('saved-coins', JSON.stringify(savedCoinarr))
   }
 
   const sortbutton = (e) =>{
-    console.log('sort button clicked!')
+    if (sortCoins){
+      setSortCoins(false)
+    }
+    else{
+      setSortCoins(true)
+    }
   }
 
   return (
@@ -97,7 +127,7 @@ function App() {
           </div>
         </div>
         <Global coins={coins} globalData={globalData} colors={colors}/>
-        <Infobar sortbutton={sortbutton}/>
+        <Infobar sortbutton={sortbutton} sortCoins={sortCoins}/>
         <div className={colorTheme} id='coin-div'>
         {filteredCoins.map(coin =>{
           return (
@@ -109,7 +139,8 @@ function App() {
                 price={coin.current_price}
                 priceChange={coin.price_change_percentage_24h}
                 rank={coin.market_cap_rank}
-                favoriteButton={favoriteButton}/>
+                favoriteButton={favoriteButton}
+                savedCoins={savedCoins}/>
           );
           })}
           </div>

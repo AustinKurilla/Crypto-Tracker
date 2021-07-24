@@ -34,3 +34,14 @@ export function getSavedThemeImg(){
         return moonfilled
     }
 }
+
+export function loadSavedCoins(){
+    const saveCoins = localStorage.getItem('saved-coins');
+    var saveCoinArr = JSON.parse(saveCoins);
+    if(saveCoins){
+        return saveCoinArr
+    }
+    else{
+        return [0]
+    }
+}
