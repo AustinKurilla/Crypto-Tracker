@@ -9,6 +9,7 @@ const Infobar = () => {
           <p className='coinprice'>Price</p>
           <p className="percentchange24">% Change 24H</p>
           <p className="marketcap">Market Cap</p>
+          <p className='favorite'>Save</p>
         </div>
     )
 }

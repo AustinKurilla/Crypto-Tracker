@@ -17,35 +17,41 @@
 .coin{
     display: flex;
     align-items: center;
-    width:40%;
+    width:50%;
     justify-content: space-around;
-    text-align: center;
-    margin-right: 4%;
+    text-align: left;
+    height: 100%;   
 }
 
 .coin img{
-    height:30px;
-    width: 30px;
+    height:40px;
+    width: 40px;
     margin-right: 10px;
 }
 
 .coin h1{
-    font-size: 1em;
-    width: 10vw;
+    width: 30%;
 }
-
+.coin h2{
+    font-size: 175%;
+}
+.coin-symbol{
+    width:15%;
+    font-size:150%;
+}
 .coin-data{
     display: flex;
     text-align: center;
     justify-content: space-between;
-    width:60%;
+    width:50%;
     margin:0 auto;
     height: 100%;
+    font-size: 150%;
 }
 
 .coin-price{
     display: flex;
-    width:35%;
+    width:25%;
     align-items: center;
 }
 
@@ -56,7 +62,7 @@
 }
 
 .coin-percent{
-    width:25%;
+    width:15%;
     display: flex;
     align-items: center;
 }
@@ -82,37 +88,89 @@
 
 .infobar{
     margin-top: 3%;
+    font-size: 150%;
 }
 
-@media only screen and (max-width:500px){
-    .coin-container{
-        font-size:70%;
+@media only screen and (max-width:1200px){
+    .CryptoApp{
+        font-size: 80%;
     }
-    .infobar{
-        font-size: 50%;
+    .coin h1{
+        font-size: 150%
     }
-    .search-text{
+    .coin img{
+        height:25px;
+        width: 25px;
+        margin-right: 10px;
+    }
+}
+@media only screen and (max-width:850px){
+    .CryptoApp{
         font-size: 60%;
     }
-    .favoritebutton{
-        width:8%;
+}
+
+@media only screen and (max-width:650px){
+    .CryptoApp{
+        font-size: 50%;
     }
-    .checkbox{
-        height:15px;
-        width:15px;
+}
+
+@media only screen and (max-width:520px){
+    .CryptoApp{
+        font-size: 45%;
     }
     .coin img{
         height:20px;
         width: 20px;
-        margin-right: 0;
+        margin-right: 10px;
     }
-    .coin{
-        margin-right: 0%;
+    .favoritebutton{
+        width: 10%;
+    }
+    .percentchange24{
+        font-size: 80%
+    }
+}
+@media only screen and (max-width:400px){
+    .CryptoApp{
+        font-size: 35%;
+    }
+}
+@media only screen and (max-width:300px){
+    .CryptoApp{
+        font-size: 30%;
+    }
+}
+@media only screen and (min-width:1400px){
+    .themeselect{
+        height: 80px;
+        width: 80px;
+    }
+    .search-input{
+        font-size: 120%;
+    }
+}
+@media only screen and (min-width:1550px){
+    .CryptoApp{
+        font-size: 150%;
+    }
+    .coin img{
+        height:60px;
+        width: 60px;
+        margin-right: 10px;
+    }
+    .themeselect{
+        height: 100px;
+        width: 100px;
+    }
+    .search-input{
+        font-size: 150%;
     }
 }
 
-@media only screen and (max-width:350px){
-    .coin-container{
-        font-size:60%;
+@media only screen and (min-width:2000px){
+    .CryptoApp{
+        font-size: 170%;
     }
 }
