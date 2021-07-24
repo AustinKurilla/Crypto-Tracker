@@ -6,10 +6,11 @@
 }
 #preloaderDIV{
   width: 100%;
-  height:100%;
+  height:100vh;
   align-items: center;
   justify-content: center;
   display: flex;
+  align-items: center;
 }
 html, body{
   min-height: 100%;
@@ -23,6 +24,7 @@ html, body{
 .theme-dark {
   margin:0;
   background-color: #1a1a1c;
+  background: #1a1a1c;
   color:#fff;
 }
 #coin-div{
@@ -30,6 +32,7 @@ html, body{
 }
 .theme-light{
   background-color: #fff;
+  background: #fff;
   color:#1a1a1c;
 }
 .coin-app{
@@ -89,6 +92,27 @@ html, body{
   justify-content: left;
   border-bottom: 1px solid white;
   margin-left: 0.5%;
+}
+.infocontainer{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.sortbuttondiv{
+  width:100%;
+  display: flex;
+  margin: 0 auto;
+  height: 10%;
+}
+.sortbutton{
+  margin: 0 auto;
+  border: none;
+  background-image: linear-gradient(-225deg, #FFAFCC 0%, #BDE0FE 48%, #A2D2FF 100%);
+  color: black;
+  border-radius: 4%;
+  width: 20%;
+  margin-left: 75%;
+  height: 5vh;
 }
 .rank{
   width:5%;

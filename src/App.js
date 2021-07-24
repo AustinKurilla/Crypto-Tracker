@@ -70,16 +70,20 @@ function App() {
 
   const favoriteButton = (rank, e) => {
     if (e.target.checked){
-      console.log(rank + 'is checked')
+      console.log(rank + ' is checked')
     }
     else{
-      console.log(rank + 'is not checked')
+      console.log(rank + ' is not checked')
     }
+  }
+
+  const sortbutton = (e) =>{
+    console.log('sort button clicked!')
   }
 
   return (
     <>
-    { loading ? ( <div className={colorTheme} id='preloaderDIV'><ReactLoading type={'spinningBubbles'} color={'#bbe0ff'} height={667} width={375} className='preloader'/></div>) : (
+    { loading ? ( <div className={colorTheme} id='preloaderDIV'><ReactLoading type={'spinningBubbles'} color={'#bbe0ff'} height={200} width={200} className='preloader'/></div>) : (
       <div className="CryptoApp" >
         <div className='search-bar'>
           <div className='navbar-left'>
@@ -93,7 +97,7 @@ function App() {
           </div>
         </div>
         <Global coins={coins} globalData={globalData} colors={colors}/>
-        <Infobar/>
+        <Infobar sortbutton={sortbutton}/>
         <div className={colorTheme} id='coin-div'>
         {filteredCoins.map(coin =>{
           return (

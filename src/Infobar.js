@@ -1,7 +1,11 @@
 import React from 'react'
 import './cryptoapp.css'
-const Infobar = () => {
+const Infobar = ({sortbutton}) => {
     return (
+      <div className='infocontainer'>
+        <div className='sortbuttondiv'>
+          <button className='sortbutton' onClick={(e) => sortbutton(e)}>Sort by Saved</button>
+        </div>
         <div className='infobar'>
           <p className='rank'>Rank</p>
           <p className="name">Name</p>
@@ -11,6 +15,7 @@ const Infobar = () => {
           <p className="marketcap">Market Cap</p>
           <p className='favorite'>Save</p>
         </div>
+      </div>
     )
 }
 
