@@ -1,5 +1,5 @@
 {
-  "homepage" : "https://austinkurilla.github.io/Crypto-Tracker",
+  "homepage": "https://austinkurilla.github.io/Crypto-Tracker",
   "name": "crpyto-tracker",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +13,7 @@
     "react-dom": "^17.0.2",
     "react-loading": "^2.0.3",
     "react-minimal-pie-chart": "^8.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-tooltip": "^4.2.21",
     "web-vitals": "^1.1.2"
