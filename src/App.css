@@ -114,6 +114,24 @@ html, body{
   margin-left: 75%;
   height: 5vh;
 }
+.showMoreButtonDiv{
+  width:100%;
+  display: flex;
+  margin: 0 auto;
+  height: 10%;
+}
+
+.showMoreButton{
+  margin: 0 auto;
+  border: none;
+  background-image: linear-gradient(-225deg, #FFAFCC 0%, #BDE0FE 48%, #A2D2FF 100%);
+  color: black;
+  border-radius: 4%;
+  width: 20%;
+  height: 5vh;
+  margin-top: 5vh;
+  margin-bottom: 3vh;
+}
 .rank{
   width:5%;
   margin-right: 6%;

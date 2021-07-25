@@ -50,7 +50,7 @@ const Global = ({coins,globalData,colors}) => {
                     ( <p className='red'> {globalData.data.market_cap_change_percentage_24h_usd.toFixed(2)}%</p>)
                 }
                 The total crypto market cap is now {
-                    totalMarketCap > 0 ? (<p className="green">${totalMarketCap}</p>) :
+                    globalData.data.market_cap_change_percentage_24h_usd > 0 ?  (<p className="green">${totalMarketCap}</p>) :
                     (<p className="red">${totalMarketCap}</p>)
                 }</div>
             <div className='global-info-right'>

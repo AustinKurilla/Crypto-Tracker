@@ -28,7 +28,8 @@ function App() {
   //Light and dark themes
   const [colorTheme, setTheme] =useState(getSavedTheme)
   const [themeImg, setThemeImg] =useState(getSavedThemeImg)
-
+  //How many coins to show (defualt 50, increased by pressing 'show more' button)
+  const [numElements, setNumElements] = useState(50)
 
   const themeChange = () => {
     //if color theme is currently light switch it to dark or vice versa
@@ -87,6 +88,12 @@ function App() {
   }
   );
 
+  //Sort the array based on rank
+  const orderArrayBy = (arr, key) => arr.sort((a, b) => a[key] - b[key]);
+  orderArrayBy(filteredCoins, filteredCoins.rank)
+
+
+  //Exectued when a 'save' checkbox is exectuted
   const favoriteButton = (rank, e) => {
     var savedCoinarr = savedCoins;
     console.log(savedCoinarr)
@@ -111,6 +118,14 @@ function App() {
     }
   }
 
+  const showmore = () =>{
+    var num = numElements
+    num = num +50
+    setNumElements(num)
+    console.log(numElements)
+  }
+
+
   return (
     <>
     { loading ? ( <div className={colorTheme} id='preloaderDIV'><ReactLoading type={'spinningBubbles'} color={'#bbe0ff'} height={200} width={200} className='preloader'/></div>) : (
@@ -129,7 +144,7 @@ function App() {
         <Global coins={coins} globalData={globalData} colors={colors}/>
         <Infobar sortbutton={sortbutton} sortCoins={sortCoins}/>
         <div className={colorTheme} id='coin-div'>
-        {filteredCoins.map(coin =>{
+        {filteredCoins.slice(0,numElements).map(coin =>{
           return (
             <Coin key={coin.id} 
                 name={coin.name} 
@@ -143,6 +158,9 @@ function App() {
                 savedCoins={savedCoins}/>
           );
           })}
+          </div>
+          <div className='showMoreButtonDiv'>
+            <button className='showMoreButton' onClick={() => showmore()}>Show More</button>
           </div>
       </div>
     )}
