@@ -7,6 +7,6 @@ Features:
   -Search for a cryptocurrency by name or ticker
   -Favorite cryptocurrency's and sort the list by your favorites 
   -Theme and favorites saved between visits using local storage
-  -Pie chart that compares the market share of the top 10 cryptocurrencies by marketcap
+  -Pie chart that compares the market share of the top 10 cryptocurrencies by market cap
 
-Live deoployment can be found at https://austinkurilla.github.io/Crypto-Tracker/
+Live deployment can be found at https://austinkurilla.github.io/Crypto-Tracker/
