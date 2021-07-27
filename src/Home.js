@@ -90,8 +90,9 @@ function Home() {
 
   //Sort the array based on rank
   const orderArrayBy = (arr, key) => arr.sort((a, b) => a[key] - b[key]);
+  console.log(filteredCoins)
   orderArrayBy(filteredCoins, filteredCoins.rank)
-
+  console.log(filteredCoins)
 
   //Exectued when a 'save' checkbox is exectuted
   const favoriteButton = (rank, e) => {
@@ -112,16 +113,17 @@ function Home() {
   const sortbutton = (e) =>{
     if (sortCoins){
       setSortCoins(false)
+      setNumElements(50)
     }
     else{
       setSortCoins(true)
+      setNumElements(50)
     }
   }
 
   const showmore = () =>{
     var num = numElements
-    num = num +50
-    setNumElements(num)
+    setNumElements(num + 50)
     console.log(numElements)
   }
 
@@ -159,9 +161,13 @@ function Home() {
           );
           })}
           </div>
-          <div className='showMoreButtonDiv'>
-            <button className='showMoreButton' onClick={() => showmore()}>Show More</button>
-          </div>
+          {numElements < 250 && (!sortCoins || savedCoins.length > numElements) &&  
+            (
+              <div className='showMoreButtonDiv'>
+                <button className='showMoreButton' onClick={() => showmore()}>Show More</button>
+              </div>
+            ) 
+          }
       </div>
     )}
     </>
