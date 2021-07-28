@@ -31,6 +31,9 @@ function Home() {
   //How many coins to show (defualt 50, increased by pressing 'show more' button)
   const [numElements, setNumElements] = useState(50)
 
+  //Sort the array based on rank
+  const orderArrayBy = (arr, key) => arr.sort((a, b) => a[key] - b[key]);
+
   const themeChange = () => {
     //if color theme is currently light switch it to dark or vice versa
     if (colorTheme === 'theme-light'){
@@ -58,7 +61,8 @@ function Home() {
     axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false'
       )
       .then(res => {
-        setCoins(res.data)
+        setCoins(orderArrayBy(res.data, 'market_cap_rank'))
+        console.log(orderArrayBy(res.data, 'market_cap_rank'))
         //Load main content after preloader finishes
         setTimeout(
           () => setLoading(false),1000 //disable preloader after content is finished loading + 2 seconds
@@ -87,12 +91,6 @@ function Home() {
     }
   }
   );
-
-  //Sort the array based on rank
-  const orderArrayBy = (arr, key) => arr.sort((a, b) => a[key] - b[key]);
-  console.log(filteredCoins)
-  orderArrayBy(filteredCoins, filteredCoins.rank)
-  console.log(filteredCoins)
 
   //Exectued when a 'save' checkbox is exectuted
   const favoriteButton = (rank, e) => {
@@ -124,9 +122,7 @@ function Home() {
   const showmore = () =>{
     var num = numElements
     setNumElements(num + 50)
-    console.log(numElements)
   }
-
 
   return (
     <>
