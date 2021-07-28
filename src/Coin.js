@@ -11,7 +11,8 @@ const Coin = ({name,image,symbol,price,marketcap,priceChange,rank,favoriteButton
                     <h2>{rank}</h2>
                     <img src={image} alt='crypto'/>
                     <h1>{name}</h1>
-                    <p className='coin-symbol'>{symbol}</p>
+                    { symbol.length < 5 ? 
+                    (<p className='coin-symbol'>{symbol}</p>) : (<p className='coin-symbol-small'>{symbol}</p>)}
                 </div>
                 <div className='coin-data'>
                     <p className='coin-price'>${price.toLocaleString()}</p>
